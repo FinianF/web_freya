@@ -1,0 +1,43 @@
+/*отображение координат на месте курсора*/
+.ol-mouse-position {
+    background-color: rgba(31, 29, 29, .8);
+    border-radius: 4px;
+    color: #eee;
+    padding: 1px 5px;
+}
+
+/*настройка кнопок зума*/
+.ol-zoom {
+    background-color: rgba(31, 29, 29, .8);
+}
+.ol-zoom:hover{
+    background-color: rgba(31, 29, 29, .8);
+}
+.ol-zoom button {
+    background-color: rgba(31, 29, 29, .8);
+}
+.ol-zoom button:hover {
+    background-color: rgba(31, 29, 29, .8);
+}
+
+/*масштабббббб*/
+.ol-scale-line {
+    background-color: rgba(31, 29, 29, .8);
+}
+
+/*настройка, поразительно, зумслайдера*/
+.ol-zoomslider {
+    background-color: rgba(31, 29, 29, .8);
+}
+
+.ol-zoomslider:hover {
+    background-color: rgba(31, 29, 29, .8);
+}
+
+.ol-zoomslider button {
+    background-color: rgba(255, 255, 255, .8);
+}
+
+.ol-zoomslider button:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
