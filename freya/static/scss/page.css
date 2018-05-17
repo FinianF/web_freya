@@ -1,21 +1,26 @@
 #head-div {
-height: 50px;
+height: 80px;
 width: 100%;
-background-color: #A0F06C;
+background-color: #CFE270;
 position: absolute;
 top: 0;
+bottom: 0;
 left : 0;
 }
 
 @font-face {
 font-family: 'Exo 2.0 Thin Italic';
-src: url('/fonts/e/Exo_2.0_Thin_Italic.ttf');
+src: url('fonts/Exo_Thin_Italic.ttf');
 }
 #head-text{
 font-family: 'Exo 2.0 Thin Italic';
-color: rgb(0, 0, 0);
-font-size: 3px;
+color: rgb(255, 255, 255);
+font-size: 50px;
 font-weight: bold;
+text-align: left;
+position: inherit;
+bottom: -20px;
+left: 50px;
 }
 /*Это еще не конец*/
 
