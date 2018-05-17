@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Map</title>
-    <link rel="stylesheet" href="ol.css">
-    <script src="ol.js"></script>
+    <title>Freya</title>
+
+    {%block styles%}
+    {% assets "page_css" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}"/>
+    {% endassets %}
+    {% endblock %}
+
 </head>
 <body>
-
+<div id="head-div"><h1 id="head-text">FREYA</h1></div>
 </body>
 </html>

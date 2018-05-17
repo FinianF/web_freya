@@ -1,0 +1,22 @@
+#head-div {
+height: 50px;
+width: 100%;
+background-color: #A0F06C;
+position: absolute;
+top: 0;
+left : 0;
+}
+
+@font-face {
+font-family: 'Exo 2.0 Thin Italic';
+src: url('/fonts/e/Exo_2.0_Thin_Italic.ttf');
+}
+#head-text{
+font-family: 'Exo 2.0 Thin Italic';
+color: rgb(0, 0, 0);
+font-size: 3px;
+font-weight: bold;
+}
+/*Это еще не конец*/
+
+

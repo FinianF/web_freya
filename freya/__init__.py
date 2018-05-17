@@ -1,11 +1,10 @@
 import os
-from flask import Flask
+from flask_script import Manager
 
-app = Flask(
-    __name__,
-    static_folder='static',
-    template_folder='templates'
-)
+from freya.manage import app
 
-if __name__ == "__main__":
+#app.config.from_object(os.environ['APP_SETTINGS'])
+#manager = Manager(app)
+
+if __name__ == '__main__':
     app.run(debug=True)
