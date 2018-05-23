@@ -6,12 +6,24 @@
 
     {%block styles%}
     {% assets "page_css" %}
-    <link rel="stylesheet" href="{{ ASSET_URL }}?foo=1dfsd23"/>
+    <link rel="stylesheet" href="{{ ASSET_URL }}?foo=1sWuDF3"/>
     {% endassets %}
     {% endblock %}
 
 </head>
 <body>
+{% assets "op_js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% assets "op_css" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
 <div id="head-div"><h1 id="head-text">FREYA</h1></div>
+
+<div id="map" style="height: 635px; margin-top: 90px;"></div> <!--норм почитай док-цию, ты заебала уже-->
+{% assets "map_js" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 </body>
 </html>

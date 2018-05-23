@@ -1,4 +1,9 @@
-/*отображение координат на месте курсора*/
+#map {
+    position: ; /*норм почитай док-цию, ты заебала уже*/
+    height: 80px;
+    width: 100%;
+}
+
 .ol-mouse-position {
     background-color: rgba(31, 29, 29, .8);
     border-radius: 4px;
@@ -6,7 +11,6 @@
     padding: 1px 5px;
 }
 
-/*настройка кнопок зума*/
 .ol-zoom {
     background-color: rgba(31, 29, 29, .8);
 }
@@ -20,24 +24,19 @@
     background-color: rgba(31, 29, 29, .8);
 }
 
-/*масштабббббб*/
 .ol-scale-line {
     background-color: rgba(31, 29, 29, .8);
 }
 
-/*настройка, поразительно, зумслайдера*/
 .ol-zoomslider {
     background-color: rgba(31, 29, 29, .8);
 }
-
 .ol-zoomslider:hover {
     background-color: rgba(31, 29, 29, .8);
 }
-
 .ol-zoomslider button {
     background-color: rgba(255, 255, 255, .8);
 }
-
 .ol-zoomslider button:hover {
     background-color: rgba(255, 255, 255, 1);
 }
