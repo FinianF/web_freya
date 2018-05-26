@@ -1,14 +1,12 @@
-from flask_assets import Environment, Bundle
+from flask_assets import Bundle
+from freya import assets
 
+page_css = Bundle("css/page.css")
+map_css = Bundle("OpenLayers/ol.css", "css/map.css", filters="cssmin")
+map_js = Bundle("OpenLayers/ol.js", "js/map.js", filters="jsmin")
 
-page_css = Bundle("scss/page.css")
-op_css = Bundle("OpenLayers/ol.css")
-op_js = Bundle("OpenLayers/ol.js")
-map_js = Bundle("js/map.js")
-
-assets = Environment()
 assets.register("page_css", page_css)
-assets.register("op_css", op_css)
-assets.register("op_js", op_js)
+assets.register("map_css", map_css)
 assets.register("map_js", map_js)
+
 
