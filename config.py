@@ -1,0 +1,16 @@
+import os
+
+class Config():
+    DEBUG = True
+
+    CSRF_ENABLED = True
+
+    SECRET_KEY = 'ANGRY_ALPACA_LOL'
+
+class ProductionConfig(Config):
+    DEBUG = False
+
+class DevelopmentConfig(Config):
+    DEVELOPMENT = True
+    ASSETS_DEBUG = True
+    

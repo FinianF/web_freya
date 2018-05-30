@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, abort
+from flask import render_template, abort
 from jinja2 import TemplateNotFound
 
-map = Blueprint('map',__name__,url_prefix="/map")
+from freya import map_bp
 
-@map.route('/')
+@map_bp.route('/')
 def map_index():
     try:
         return render_template('map.html')
