@@ -18,6 +18,10 @@
 <div id="head-div"><h1 id="head-text">FREYA</h1></div>
 
 <div id="map" style="height: 635px; margin-top: 90px;"></div>
+<div id="popup" class="ol-popup">
+  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+  <div id="popup-content"></div>
+</div>
 {% assets "map_js" %}
 	<script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
