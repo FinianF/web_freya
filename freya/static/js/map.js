@@ -5,23 +5,14 @@ var mousePositionControl = new ol.control.MousePosition({
     }
 });
 
-var container = document.getElementById('popup');
-var content = document.getElementById('popup-content');
-var closer = document.getElementById('popup-closer');
+var pst = ol.proj.fromLonLat([37.8519, 55.9317]);
 
-var overlay = new ol.Overlay({
-element: container,
-autoPan: true,
-autoPanAnimation: {
-  duration: 250
-}
+var marker = new ol.Overlay({
+position: pst,
+positioning: 'center-center',
+element: document.getElementById('marker'),
+stopEvent: false
 });
-
-closer.onclick = function() {
-overlay.setPosition(undefined);
-closer.blur();
-return false;
-};
 
 var map = new ol.Map({
     controls: ol.control.defaults().extend([
@@ -29,7 +20,7 @@ var map = new ol.Map({
         new ol.control.ZoomSlider(),
         new ol.control.ScaleLine()
     ]),
-    overlays: [overlay],
+    overlays: [marker],
     target: 'map'
 });
 
@@ -45,12 +36,3 @@ var view = new ol.View({
     zoom: 3
 });
 map.setView(view);
-
-map.on('singleclick', function(evt) {
-var coordinate = evt.coordinate;
-var hdms = ol.coordinate.format(ol.proj.transform(
-    coordinate, 'EPSG:3857', 'EPSG:4326'), '{y}, {x}', 5);
-
-content.innerHTML = '<p>You clicked here:</p><code>' + hdms + '</code>';
-overlay.setPosition(coordinate);
-});
