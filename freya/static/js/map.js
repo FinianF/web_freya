@@ -71,8 +71,7 @@
                 'html': true
             });
 
-            debugger;
-            $(element).data('bs.popover').options.content = '<p>arthjkyufkj.vhytr4WRTEYUdilfigufkytreww</p>'
+            $(element).data('bs.popover').options.content = '<p>Это Королёв.<br>Здесь живет создатель этого сайта.</br></p>'
             $(element).popover('show');
 
         });
