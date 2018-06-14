@@ -8,7 +8,7 @@ from sqlalchemy import BigInteger, SmallInteger
 Base = db.Model
 
 
-class IridiumTelemetry(Base):
+class IridiumPacket(Base):
     id = Column(BigInteger, primary_key=True, nullable=False, autoincrement=True)
 
     sdr_reference = Column(Integer)
@@ -32,7 +32,7 @@ class IridiumTelemetry(Base):
 class FreyaPacket(Base):
     id = Column(BigInteger, primary_key=True, nullable=False)
 
-    iridium_packet_id = Column(ForeignKey(IridiumTelemetry.id), nullable=False)
+    iridium_packet_id = Column(ForeignKey(IridiumPacket.id), nullable=False)
 
     flag = Column(SmallInteger)
     time = Column(BigInteger)
@@ -55,7 +55,7 @@ class FreyaPacket(Base):
 
     __tablename__ = "Freya_packets"
 
-    ref_freya_packets = relationship(IridiumTelemetry, back_populates="ref_iridium_packet")
+    ref_freya_packets = relationship(IridiumPacket, back_populates="ref_iridium_packet")
 
 
 
