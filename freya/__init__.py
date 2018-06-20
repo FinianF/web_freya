@@ -20,12 +20,15 @@ assets = Environment(app)
 import freya.assets
 
 map_bp = Blueprint('map', __name__, url_prefix="/map")
+
 import freya.blueprints.map
 import freya.blueprints.rpc
+
 app.register_blueprint(map_bp)
 jsonrpc.init_app(app)
 
 db.init_app(app)
+
 import freya.models
 
 

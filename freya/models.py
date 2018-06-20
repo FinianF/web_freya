@@ -1,5 +1,4 @@
 from freya import db
-
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Integer, String, Float, DateTime, Boolean
@@ -9,10 +8,12 @@ Base = db.Model
 
 
 class IridiumPacket(Base):
-    id = Column(BigInteger, primary_key=True, nullable=False, autoincrement=True)
+    __tablename__ = "Iridium_packets"
+
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
 
     sdr_reference = Column(Integer)
-    imai = Column(String(length=100))
+    imei = Column(String(length=100))
     session_status = Column(SmallInteger)
     momsn = Column(Integer)
     mtmsn = Column(Integer)
@@ -21,16 +22,16 @@ class IridiumPacket(Base):
     #location information
     indicator = Column(SmallInteger)
     latitude = Column(Float)
-    lohgitude = Column(Float)
+    longitude = Column(Float)
     cep_radius = Column(Integer)
-
-    __tablename__ = "Iridium_packets"
 
     ref_freya_packets = relationship("FreyaPacket", back_populates = "ref_iridium_packet")
 
 
 class FreyaPacket(Base):
-    id = Column(BigInteger, primary_key=True, nullable=False)
+    __tablename__ = "Freya_packets"
+
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
 
     iridium_packet_id = Column(ForeignKey(IridiumPacket.id), nullable=False)
 
@@ -53,9 +54,7 @@ class FreyaPacket(Base):
     longitude = Column(Float)
     has_fix = Column(Boolean)
 
-    __tablename__ = "Freya_packets"
-
-    ref_freya_packets = relationship(IridiumPacket, back_populates="ref_iridium_packet")
+    ref_iridium_packet = relationship('IridiumPacket', back_populates="ref_freya_packets")
 
 
 
