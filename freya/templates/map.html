@@ -18,10 +18,17 @@
 
 <div id="map"></div>
 <div style="display: none;">
-    <div id="popup" data-toggle="popover" title="Some data"></div>
+    <div id="popup" data-toggle="popover" title="Telemetry"></div>
 </div>
 {% assets "map_js" %}
 	<script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+       draw({{lat}}, {{lon}}, "<p>{{desc | safe}}<p/>")
+    })
+</script>
 </body>
 </html>
