@@ -1,4 +1,4 @@
- $(document).ready(function(){
+function draw(lat, lon, desc){
     var mousePositionControl = new ol.control.MousePosition({
         projection: 'EPSG:4326',
         coordinateFormat: function(coordinate) {
@@ -47,7 +47,7 @@
         target: 'map'
     });
 
-    var pst = ol.proj.fromLonLat([37.8519, 55.9317]);
+    var pst = ol.proj.fromLonLat([lon, lat]);
 
     var popup = new ol.Overlay ({
         element: document.getElementById("popup")
@@ -71,7 +71,7 @@
                 'html': true
             });
 
-            $(element).data('bs.popover').options.content = '<p>Это Королёв.<br>Здесь живет создатель этого сайта.</br></p>'
+            $(element).data('bs.popover').options.content = desc
             $(element).popover('show');
 
         });
@@ -85,4 +85,4 @@
     });
 
     vector.getSource().addFeature(feature);
- });
+ };
