@@ -40,7 +40,7 @@ class FreyaPacket(Base):
 
     bmp_press = Column(Float)
     bmp_temp = Column(Float)
-    dc_temp = Column(Float)
+    ds_temp = Column(Float)
 
     accx = Column(Float)
     accy = Column(Float)
@@ -50,6 +50,7 @@ class FreyaPacket(Base):
     mq7_conc = Column(BigInteger)
     geiger_ticks = Column(BigInteger)
 
+    height = Column(Float)
     latitude = Column(Float)
     longitude = Column(Float)
     has_fix = Column(Boolean)

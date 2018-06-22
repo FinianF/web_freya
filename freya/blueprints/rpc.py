@@ -3,7 +3,7 @@ from freya.models import IridiumPacket, FreyaPacket
 from datetime import datetime
 
 #@jsonrpc.method("pushdata")
-def index(**kwargs):
+def index(*kwargs):
 
     data = kwargs[0]
 
@@ -36,9 +36,9 @@ def index(**kwargs):
         freya_pack.flag = pack['Flag']
         freya_pack.time = pack['Time']
 
-        freya_pack.bmp_press = pack['BMPPress']
+        freya_pack.bmp_press = pack['BMPPress'] / 133.3224
         freya_pack.bmp_temp = pack['BMPTemp'] / 100
-        freya_pack.dc_temp = pack['DSTemp'] / 16
+        freya_pack.ds_temp = pack['DSTemp'] / 16
 
         freya_pack.accx = pack['X']
         freya_pack.accy = pack['Y']
@@ -49,6 +49,7 @@ def index(**kwargs):
         freya_pack.mq7_conc = pack['MQ7Conc']
         #и это
         freya_pack.geiger_ticks = pack['GeigerTicks']
+        freya_pack.height = pack['Height']
         freya_pack.latitude = pack['Latitude']
 
         freya_pack.longitude = pack['Longitude']
