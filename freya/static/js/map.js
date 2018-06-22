@@ -18,14 +18,10 @@ function draw(lat, lon, desc){
           fill: new ol.style.Fill({
             color: 'rgba(255, 255, 255, 0.2)'
           }),
-          stroke: new ol.style.Stroke({
-            color: '#ffcc33',
-            width: 2
-          }),
           image: new ol.style.Circle({
-            radius: 3,
+            radius: 3.5,
             fill: new ol.style.Fill({
-              color: '#ff9933'
+              color: 'red'
             })
           })
         })
@@ -78,7 +74,6 @@ function draw(lat, lon, desc){
     });
 
     map.addInteraction(select);
-
 
     feature = new ol.Feature({
         geometry: new ol.geom.Point(pst)
