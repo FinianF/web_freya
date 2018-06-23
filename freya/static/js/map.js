@@ -43,7 +43,7 @@ function draw(lat, lon, desc){
         target: 'map'
     });
 
-    var pst = ol.proj.fromLonLat([lon, lat]);
+    var popup_data = ''
 
     var popup = new ol.Overlay ({
         element: document.getElementById("popup")
@@ -67,7 +67,7 @@ function draw(lat, lon, desc){
                 'html': true
             });
 
-            $(element).data('bs.popover').options.content = desc
+            $(element).data('bs.popover').options.content = popup_data;
             $(element).popover('show');
 
         });
@@ -75,9 +75,24 @@ function draw(lat, lon, desc){
 
     map.addInteraction(select);
 
-    feature = new ol.Feature({
-        geometry: new ol.geom.Point(pst)
-    });
 
-    vector.getSource().addFeature(feature);
+    function update_map(data) {
+        vector.getSource().clear();
+        pst = ol.proj.fromLonLat([data.lon, data.lat]);
+        feature = new ol.Feature({
+            geometry: new ol.geom.Point(pst)
+        });
+        vector.getSource().addFeature(feature);
+
+        popup_data = data.format_data;
+        //$(element).data('bs.popover').options.content = popup_data;
+    };
+
+
+    setInterval(
+        function() {
+            $.getJSON("/map/map_data", update_map)
+        },
+        1000
+    )
  };

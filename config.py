@@ -7,12 +7,18 @@ class Config():
 
     SECRET_KEY = 'ANGRY_ALPACA_LOL'
 
+
 class ProductionConfig(Config):
     DEBUG = False
 
+
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
+
     ASSETS_DEBUG = True
+
     SQLALCHEMY_DATABASE_URI = "sqlite:///test.db"
-    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    TELEMETRY_UPDATE_PERIOD_MS = 500

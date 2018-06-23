@@ -2,7 +2,7 @@ from freya import jsonrpc, db, app
 from freya.models import IridiumPacket, FreyaPacket
 from datetime import datetime
 
-#@jsonrpc.method("pushdata")
+@jsonrpc.method("pushdata")
 def index(*kwargs):
 
     data = kwargs[0]
