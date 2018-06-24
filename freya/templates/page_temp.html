@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Freya</title>{% endblock %}
+
+    {%block styles%}
+
+    {% assets "page_css" %}
+    	<link rel="stylesheet" href="{{ ASSET_URL }}"/>
+    {% endassets %}
+
+    {% endblock %}
+
+</head>
+<body>
+<div class="layout">
+    <div class="layout_row layout_row_navbar">
+        <div class="layout_cell">
+            <div class="base-navbar">
+                <div class="base-navbar_section base-navbar_section_left">
+                    <span class="title">FREYA</span>
+                </div>
+                <div class="base-navbar_section base-navbar_section_right">
+                    <ul class="navbar-links">
+                       <li class="navbar-links_item">
+                           <a href="/map/" class="navbar-links_item-link">Карта</a>
+                       </li>
+                        <li class="navbar-links_item" id="last_item">
+                           <a href="https://vk.com/finian_f" class="navbar-links_item-link">О нас</a>
+                       </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+</div>
+
+{% block js %}{% endblock %}
+</body>
+</html>
