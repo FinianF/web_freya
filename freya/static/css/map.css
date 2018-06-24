@@ -1,7 +1,46 @@
 #map {
-    height: 635px;
-    margin-top: 90px;
+    display: block;
+    position: relative;
+    box-sizing: inherit;
+    width: 100%;
+    height: 620px;
 }
+
+.layout_cell_map {
+    padding-top: 20px;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+    padding: 20px;
+    min-width: 100%;
+}
+
+.base_map_content {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.map_desc_cell_right {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-left: 10px;
+    min-width: 300px;
+    max-width: 25%;
+}
+
+.desc {
+    font-family: 'Exo 2.0 Thin Italic';
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    text-align: justify;
+}
+
+.cat_pic {
+    box-sizing: content-box;
+}
+
 
 .ol-mouse-position {
     background-color: rgba(31, 29, 29, .8);
@@ -41,16 +80,16 @@
 }
 
 .popover-title {
-background: #85DA61;
-font-family: 'Exo 2.0 Thin Italic';
-color: white;
-font-size: 13.8pt;
-font-weight: bold;
+    background: #85DA61;
+    font-family: 'Exo 2.0 Thin Italic';
+    color: white;
+    font-size: 13.8pt;
+    font-weight: bold;
 }
 .popover-content {
-width: 236px;
-font-family: 'Exo 2.0 Thin Italic';
-color: black;
-font-size: 11.5pt;
-font-weight: bold;
+    width: 236px;
+    font-family: 'Exo 2.0 Thin Italic';
+    color: black;
+    font-size: 11.5pt;
+    font-weight: bold;
 }
