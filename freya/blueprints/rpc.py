@@ -2,10 +2,9 @@ from freya import jsonrpc, db, app
 from freya.models import IridiumPacket, FreyaPacket
 from datetime import datetime
 
-@jsonrpc.method("pushdata")
-def index(*kwargs):
 
-    data = kwargs[0]
+
+def do_push_data(data):
 
     irid = IridiumPacket()
 
@@ -59,4 +58,18 @@ def index(*kwargs):
 
     db.session.commit()
 
-    return u"la-la-la"
+
+
+@jsonrpc.method("pushdata")
+def index(*args):
+
+    try:
+        data = args[0]
+        app.logger.info("got data from daemon. data: %s", data)
+        do_push_data(data)
+        return u"la-la-la"
+
+    except Exception as e:
+        app.logger.exception("something is not ok! data: %s", data)
+        raise
+
