@@ -11,31 +11,31 @@
 
 {% block content %}
 <div class="layout_row layout_row_content">
-        <div class="layout_cell_map">
-            <div class="base_map_content">
-                <div id="map"></div>
-                <div style="display: none;">
-                    <div id="popup" data-toggle="popover" title="Telemetry"></div>
-                </div>
-                <div class="map_desc_cell_right">
-                    <p class="desc">
-                        Здесь вы можете ознакомиться с последней телеметрией, полученной с нашего аппарата.<br>
-                        Для этого нажмите на красную точку на карте. Чтобы закрыть окно с телеметрией, кликните в любое другое место на карте.<br>
-                        Обновление телеметрии происходит динамически в режиме реального времени.
-                    </p>
-                    <div class="cat_pic">
-                        {% assets "cat_pic" %}
-                        <img src="{{ ASSET_URL }}" alt="cat">
-                        {% endassets %}
-                    </div>
+    <div class="layout_cell_map">
+        <div class="base_map_content">
+            <div id="map"></div>
+            <div style="display: none;">
+                <div id="popup" data-toggle="popover" title="Telemetry"></div>
+            </div>
+            <div class="map_desc_cell_right">
+                <p class="desc">
+                    Здесь вы можете ознакомиться с последней телеметрией, полученной с нашего аппарата.<br>
+                    Для этого нажмите на красную точку на карте. Чтобы закрыть окно с телеметрией, кликните в любое другое место на карте.<br>
+                    Обновление телеметрии происходит динамически в режиме реального времени.
+                </p>
+                <div class="cat_pic">
+                    {% assets "cat_pic" %}
+                    <img src="{{ ASSET_URL }}" alt="cat">
+                    {% endassets %}
                 </div>
             </div>
         </div>
+    </div>
  </div>
 {% endblock %}
 
 {% block js %}
-
+{{ super() }}
 {% assets "map_js" %}
 	<script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}

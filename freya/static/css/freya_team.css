@@ -1,0 +1,24 @@
+.base_content {
+    display: flex;
+    -webkit-box-align: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.content {
+    font-family: 'Exo 2.0 Thin Italic';
+    font-weight: bold;
+    font-size: 25px;
+    color: grey;
+    text-align: justify;
+}
+
+.title-content {
+    font-family: 'Exo 2.0 Thin Italic';
+    font-weight: bold;
+    font-size: 50px;
+    color: black;
+}
+
+#main-text {
+
+}

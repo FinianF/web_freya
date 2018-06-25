@@ -3,6 +3,11 @@
     src: url('fonts/Exo_Thin_Italic.ttf');
 }
 
+body {
+    padding: 0;
+    min-height: 150%;
+}
+
 .layout {
     position: relative;
     display: table;
@@ -37,7 +42,7 @@
     box-sizing: border-box;
     margin: 0 auto;
     padding: 0 32px;
-    min-width: 1024px;
+    min-width: 800px;
     max-width: 1364px
 }
 
@@ -86,6 +91,10 @@
     font-size: 50px;
     color: white;
 }
+.title:hover {
+    text-decoration:none;
+    color: white;
+}
 
 .navbar-links {
     display: flex;
@@ -122,4 +131,12 @@
 }
 .navbar-links_item-link:hover {
     color: grey;
+}
+
+.content_title {
+    font-family: 'Exo 2.0 Thin Italic';
+    font-weight: bold;
+    font-size: 70px;
+    color: black;
+    text-align: center;
 }
