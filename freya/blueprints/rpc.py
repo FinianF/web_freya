@@ -61,10 +61,10 @@ def do_push_data(data):
 
 
 @jsonrpc.method("pushdata")
-def index(*args):
+def index(**args):
 
     try:
-        data = args[0]
+        data = args
         app.logger.info("got data from daemon. data: %s", data)
         do_push_data(data)
         return u"la-la-la"
