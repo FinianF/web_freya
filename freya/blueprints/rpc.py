@@ -45,8 +45,8 @@ def do_push_data(data):
         freya_pack.mq7_conc = pack['MQ7Conc']
         freya_pack.geiger_ticks = pack['GeigerTicks']
         freya_pack.height = pack['Height']
-        freya_pack.latitude = pack['Latitude']
-        freya_pack.longitude = pack['Longitude']
+        freya_pack.latitude = pack['Latitude'] / 100
+        freya_pack.longitude = pack['Longitude'] / 100
         freya_pack.has_fix = pack['HasFix']
 
         db.session.add(freya_pack)
