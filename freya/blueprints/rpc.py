@@ -51,6 +51,8 @@ def do_push_data(data):
 
         db.session.add(freya_pack)
 
+        print("АГА! Я что-то получил")
+
     db.session.commit()
 
 
@@ -62,6 +64,7 @@ def index(**args):
         data = args
         app.logger.info("got data from daemon. data: %s", data)
         do_push_data(data)
+        print("АГА! Я что-то получил")
         return u"la-la-la"
 
     except Exception as e:
