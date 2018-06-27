@@ -56,7 +56,6 @@ def do_push_data(data):
     db.session.commit()
 
 
-
 @jsonrpc.method("pushdata")
 def index(**args):
 
@@ -66,7 +65,6 @@ def index(**args):
         do_push_data(data)
         print("АГА! Я что-то получил")
         return u"la-la-la"
-
     except Exception as e:
         app.logger.exception("something is not ok! data: %s", data)
         raise

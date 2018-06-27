@@ -1,4 +1,4 @@
-function draw(lat, lon, desc){
+function draw(){
     var mousePositionControl = new ol.control.MousePosition({
         projection: 'EPSG:4326',
         coordinateFormat: function(coordinate) {
