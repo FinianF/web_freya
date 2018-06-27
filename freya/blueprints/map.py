@@ -22,8 +22,8 @@ def get_data():
         irid_packet = IridiumPacket.query.order_by(IridiumPacket.id.desc()).first()
         freya_packet = FreyaPacket.query.order_by(FreyaPacket.id.desc()).first()
 
-        lat = freya_packet.latitude
-        lon = freya_packet.longitude
+        lat = round(freya_packet.latitude, 4)
+        lon = round(freya_packet.longitude, 4)
         press = round(freya_packet.bmp_press / 133.3224, 2)
         temp = round(freya_packet.bmp_temp, 2)
         cdm = freya_packet.cdm_conc
