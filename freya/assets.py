@@ -1,7 +1,7 @@
 from flask_assets import Bundle
 from freya import assets
 
-page_css = Bundle("css/page.css", "css/freya_team.css")
+page_css = Bundle("css/page.css")
 ft_css = Bundle("css/freya_team.css")
 map_css = Bundle("OpenLayers/ol.css", "css/map.css", filters="cssmin")
 bt_css = Bundle("Bootstrap/bootstrap.css", filters="cssmin")
