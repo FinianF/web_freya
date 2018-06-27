@@ -5,6 +5,7 @@ from jinja2 import TemplateNotFound
 from flask_jsonrpc import jsonify
 
 from freya import map_bp
+from freya import app
 from freya.models import FreyaPacket, IridiumPacket
 
 @map_bp.route('/')
