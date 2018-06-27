@@ -9,6 +9,26 @@ static_folder="static",
 template_folder="templates"
 )
 
+
+from logging.config import dictConfig
+
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
+
+
 from config import *
 
 app.config.from_object(DevelopmentConfig())
@@ -31,7 +51,6 @@ import freya.blueprints.rpc
 app.register_blueprint(mp_bp)
 app.register_blueprint(ft_bp)
 app.register_blueprint(map_bp)
-
 jsonrpc.init_app(app)
 db.init_app(app)
 

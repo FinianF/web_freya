@@ -25,3 +25,5 @@ include/
 include/*
 
 env/
+
+*.db

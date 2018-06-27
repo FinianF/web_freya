@@ -21,13 +21,15 @@ def map_index():
     mq7 = freya_packet.mq7_conc
     geiger = freya_packet.geiger_ticks
 
-    format_data = f"Координаты: {lat}, {lon}<br>Давление: {press} мм рт. ст.<br>Температура: {temp} °C<br>" \
-        f"Концентрация CO2: {cdm} ppm<br>Концентрация CO: {mq7}<br>Уровень радиации: {geiger}"
+    format_data = "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>Температура: {3} °C<br>" \
+        "Концентрация CO2: {4} ppm<br>Концентрация CO: {5}<br>Уровень радиации: {6}".format(
+            lat, lon, press, temp, cdm, mq7, geiger
+        )
+    
     try:
         return render_template('map.html', lat=lat, lon=lon, desc=format_data)
     except TemplateNotFound:
-        abort(404)
-
+         abort(404)
 
 @map_bp.route('/map_data')
 def get_data():
@@ -42,8 +44,10 @@ def get_data():
     mq7 = freya_packet.mq7_conc
     geiger = freya_packet.geiger_ticks
 
-    format_data = f"Координаты: {lat}, {lon}<br>Давление: {press} мм рт. ст.<br>Температура: {temp} °C<br>" \
-                  f"Концентрация CO2: {cdm} ppm<br>Концентрация CO: {mq7} ppm<br>Уровень радиации: {geiger}"
+    format_data = "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>Температура: {3} °C<br>" \
+        "Концентрация CO2: {4} ppm<br>Концентрация CO: {5}<br>Уровень радиации: {6}".format(
+            lat, lon, press, temp, cdm, mq7, geiger
+        )
 
     telemetry = {
         'lat' : irid_packet.latitude,
