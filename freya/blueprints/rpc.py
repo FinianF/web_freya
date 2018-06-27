@@ -2,8 +2,6 @@ from freya import jsonrpc, db, app
 from freya.models import IridiumPacket, FreyaPacket
 from datetime import datetime
 
-
-
 def do_push_data(data):
 
     irid = IridiumPacket()

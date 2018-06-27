@@ -12,7 +12,6 @@ def map_index():
     irid_packet = IridiumPacket.query.order_by(IridiumPacket.id.desc()).first()
     freya_packet = FreyaPacket.query.order_by(FreyaPacket.id.desc()).first()
 
-    #ВЫБЕРИ УЖЕ НОРМ СПОСОБ ДЕЛАТЬ ЭТО ЫВАПВРОЛАПВНЕАВЫ
     lat = irid_packet.latitude
     lon = irid_packet.longitude
     press = round(freya_packet.bmp_press, 2)
@@ -22,7 +21,7 @@ def map_index():
     geiger = freya_packet.geiger_ticks
 
     format_data = "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>Температура: {3} °C<br>" \
-        "Концентрация CO2: {4} ppm<br>Концентрация CO: {5}<br>Уровень радиации: {6}".format(
+        "Концентрация CO2: {4} ppm<br>Концентрация CO: {5} ppm<br>Уровень радиации: {6} мкР/ч".format(
             lat, lon, press, temp, cdm, mq7, geiger
         )
     
@@ -45,7 +44,7 @@ def get_data():
     geiger = freya_packet.geiger_ticks
 
     format_data = "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>Температура: {3} °C<br>" \
-        "Концентрация CO2: {4} ppm<br>Концентрация CO: {5}<br>Уровень радиации: {6}".format(
+        "Концентрация CO2: {4} ppm<br>Концентрация CO: {5} ppm<br>Уровень радиации: {6} мкР/ч".format(
             lat, lon, press, temp, cdm, mq7, geiger
         )
 
