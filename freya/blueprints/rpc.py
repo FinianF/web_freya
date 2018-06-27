@@ -33,7 +33,7 @@ def do_push_data(data):
         freya_pack.flag = pack['Flag']
         freya_pack.time = pack['Time']
 
-        freya_pack.bmp_press = pack['BMPPress'] / 133.3224
+        freya_pack.bmp_press = pack['BMPPress']
         freya_pack.bmp_temp = pack['BMPTemp'] / 100
         freya_pack.ds_temp = pack['DSTemp'] / 16
 
