@@ -12,8 +12,8 @@ def map_index():
     irid_packet = IridiumPacket.query.order_by(IridiumPacket.id.desc()).first()
     freya_packet = FreyaPacket.query.order_by(FreyaPacket.id.desc()).first()
 
-    lat = irid_packet.latitude
-    lon = irid_packet.longitude
+    lat = freya_packet.latitude
+    lon = freya_packet.longitude
     press = round(freya_packet.bmp_press, 2)
     temp = round(freya_packet.bmp_temp, 2)
     cdm = freya_packet.cdm_conc
@@ -35,8 +35,8 @@ def get_data():
     irid_packet = IridiumPacket.query.order_by(IridiumPacket.id.desc()).first()
     freya_packet = FreyaPacket.query.order_by(FreyaPacket.id.desc()).first()
 
-    lat = irid_packet.latitude
-    lon = irid_packet.longitude
+    lat = freya_packet.latitude
+    lon = freya_packet.longitude
     press = round(freya_packet.bmp_press, 2)
     temp = round(freya_packet.bmp_temp, 2)
     cdm = freya_packet.cdm_conc
@@ -49,8 +49,8 @@ def get_data():
         )
 
     telemetry = {
-        'lat' : irid_packet.latitude,
-        'lon' : irid_packet.longitude,
+        'lat' : freya_packet.latitude,
+        'lon' : freya_packet.longitude,
         'press' : round(freya_packet.bmp_press, 2),
         'temp' : round(freya_packet.bmp_temp, 2),
         'cdm' : freya_packet.cdm_conc,
