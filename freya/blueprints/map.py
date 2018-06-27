@@ -43,7 +43,7 @@ def get_data():
     geiger = freya_packet.geiger_ticks
 
     format_data = f"Координаты: {lat}, {lon}<br>Давление: {press} мм рт. ст.<br>Температура: {temp} °C<br>" \
-                  f"Концентрация CO2: {cdm} ppm<br>Концентрация CO: {mq7}<br>Уровень радиации: {geiger}"
+                  f"Концентрация CO2: {cdm} ppm<br>Концентрация CO: {mq7} ppm<br>Уровень радиации: {geiger}"
 
     telemetry = {
         'lat' : irid_packet.latitude,

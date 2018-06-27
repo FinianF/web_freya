@@ -2,6 +2,27 @@ from freya import jsonrpc, db, app
 from freya.models import IridiumPacket, FreyaPacket
 from datetime import datetime
 
+global last_time
+global last_geiger
+last_geiger = 0
+last_time = 0
+
+def converter(time, raw_geiger):
+    global last_time
+    global last_geiger
+    print(time)
+    print(last_time, last_geiger)
+    time_delta = time * 0.001 - last_time
+    print(time_delta)
+    geiger_delta = raw_geiger - last_geiger
+    print(geiger_delta)
+    geiger = geiger_delta / 75 / time_delta * 3600
+    print(geiger)
+    last_time = time
+    last_geiger = raw_geiger
+
+    return(geiger)
+
 @jsonrpc.method("pushdata")
 def index(*kwargs):
 
@@ -26,7 +47,6 @@ def index(*kwargs):
 
     db.session.add(irid)
 
-
     payload = data['MOPayload']
 
     for pack in payload:
@@ -34,7 +54,8 @@ def index(*kwargs):
         freya_pack.ref_iridium_packet = irid
 
         freya_pack.flag = pack['Flag']
-        freya_pack.time = pack['Time']
+        time = pack['Time']
+        freya_pack.time = time
 
         freya_pack.bmp_press = pack['BMPPress'] / 133.3224
         freya_pack.bmp_temp = pack['BMPTemp'] / 100
@@ -45,10 +66,9 @@ def index(*kwargs):
         freya_pack.accz = pack['Z']
 
         freya_pack.cdm_conc = pack['CDMConc']
-        #надо перевести это во что-то нормальное
         freya_pack.mq7_conc = pack['MQ7Conc']
-        #и это
-        freya_pack.geiger_ticks = pack['GeigerTicks']
+        raw_geiger = pack['GeigerTicks']
+        freya_pack.geiger_ticks = converter(time, raw_geiger)
         freya_pack.height = pack['Height']
         freya_pack.latitude = pack['Latitude']
 

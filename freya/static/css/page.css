@@ -136,7 +136,14 @@ body {
 .content_title {
     font-family: 'Exo 2.0 Thin Italic';
     font-weight: bold;
-    font-size: 70px;
+    font-size: 55px;
     color: black;
     text-align: center;
+}
+
+#cat_pic {
+    display:block;
+    margin:0 auto;
+    width: 700px;
+    height: 400px;
 }
