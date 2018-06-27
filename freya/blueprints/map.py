@@ -21,6 +21,10 @@ def map_index():
         mq7 = freya_packet.mq7_conc
         geiger = freya_packet.geiger_ticks
 
+        format_data = "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>Температура: {3} °C<br>" \
+                      "Концентрация CO2: {4} ppm<br>Концентрация CO: {5} ppm<br>Уровень радиации: {6} мкР/ч".format(
+            lat, lon, press, temp, cdm, mq7, geiger
+        )
         try:
             return render_template('map.html', lat=lat, lon=lon, desc=format_data)
         except TemplateNotFound:
@@ -28,9 +32,6 @@ def map_index():
     except:
         return render_template('map.html', lat=0, lon=0, desc='Ого, похоже, что данных нет')
 
-        "Концентрация CO2: {4} ppm<br>Концентрация CO: {5} ppm<br>Уровень радиации: {6} мкР/ч".format(
-            lat, lon, press, temp, cdm, mq7, geiger
-        )
 
 @map_bp.route('/map_data')
 def get_data():
