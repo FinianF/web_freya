@@ -32,5 +32,5 @@ a = {'MOHeader': [{'CDRReference': 1730168,
 
 db.init_app(app)
 with app.app_context():
-    index(a)
+    index()
 

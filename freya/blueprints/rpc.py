@@ -64,6 +64,7 @@ def index(**args):
         app.logger.info("got data from daemon. data: %s", data)
         do_push_data(data)
         print("АГА! Я что-то получил")
+        app.logger.info("Количество пакетов: %d", FreyaPacket.query(FreyaPacket).count())
         return u"la-la-la"
     except Exception as e:
         app.logger.exception("something is not ok! data: %s", data)

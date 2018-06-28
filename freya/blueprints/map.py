@@ -16,11 +16,9 @@ def map_index():
         abort(404)
 
 
-
 @map_bp.route('/map_data')
 def get_data():
     try:
-        irid_packet = IridiumPacket.query.order_by(IridiumPacket.id.desc()).first()
         freya_packet = FreyaPacket.query.order_by(FreyaPacket.id.desc()).first()
 
         lat = round(freya_packet.latitude, 4)
