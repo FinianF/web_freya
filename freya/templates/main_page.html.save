@@ -1,0 +1,17 @@
+{% extends "page_temp.html" %}
+
+{% block content %}
+<div class="layout_row layout_row_content">
+    <div class="layout_cell layout_cell_content">
+        <div class="base_content">
+            <p class="main_block">
+                <h1 class="content_title">html и css скоро сведут меня в могилу<br>мяу</h1>
+            </p>
+            <div class="cat_pic">
+                {% assets "cat_pic2" %}
+                <img id="cat_pic" src="{{ ASSET_URL }}" alt="cat">
+                {% endassets %}          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
