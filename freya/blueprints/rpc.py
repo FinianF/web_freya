@@ -45,8 +45,10 @@ def do_push_data(data):
         freya_pack.mq7_conc = pack['MQ7Conc']
         freya_pack.geiger_ticks = pack['GeigerTicks']
         freya_pack.height = pack['Height']
-        freya_pack.latitude = pack['Latitude'] / 100
-        freya_pack.longitude = pack['Longitude'] / 100
+        pre_lat = pack['Latitude']
+        pre_lon = pack['Longitude']
+        freya_pack.latitude = (pre_lat / 100 - pre_lat // 100) / 60 + (pre_lat // 100)
+        freya_pack.longitude = (pre_lon / 100 - pre_lon // 100) + (pre_lon // 100)
         freya_pack.has_fix = pack['HasFix']
 
         db.session.add(freya_pack)
@@ -64,7 +66,6 @@ def index(**args):
         app.logger.info("got data from daemon. data: %s", data)
         do_push_data(data)
         print("АГА! Я что-то получил")
-        app.logger.info("Количество пакетов: %d", FreyaPacket.query.count())
         return u"la-la-la"
     except Exception as e:
         app.logger.exception("something is not ok! data: %s", data)
