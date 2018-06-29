@@ -37,8 +37,10 @@ def get_data():
         cdm = freya_packet.cdm_conc
         mq7 = freya_packet.mq7_conc
 
-        geiger = (ticks - last_ticks) / (time - last_time)
-
+        try:
+            geiger = (ticks - last_ticks) / (time - last_time)
+        except ZeroDivisionError:
+            geiger = 0
         last_time = time
         last_ticks = ticks
 
