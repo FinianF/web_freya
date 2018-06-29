@@ -41,8 +41,10 @@ def get_data():
             geiger = (ticks - last_ticks) / (time - last_time)
         except ZeroDivisionError:
             geiger = 0
-        last_time = time
-        last_ticks = ticks
+
+        if time != last_time:
+	    last_time = time
+            last_ticks = ticks
 
         format_data = "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>Температура: {3} °C<br>" \
                       "Концентрация CO2: {4} ppm<br>Концентрация CO: {5} ppm<br>Уровень радиации: {6} мкР/ч".format(
@@ -50,6 +52,8 @@ def get_data():
         )
 
         telemetry = {
+	    'last_time': last_time,
+	    'time': time,
             'lat': freya_packet.latitude,
             'lon': freya_packet.longitude,
             'press': round(freya_packet.bmp_press, 2),
