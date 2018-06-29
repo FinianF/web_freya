@@ -40,7 +40,9 @@ def get_data():
         mq7 = freya_packet.mq7_conc
 
         if time != last_time:
-            geiger = (ticks - last_ticks) / (time - last_time)
+            dticks = ticks - last_ticks
+            dtime = (time - last_time) * 0.001
+            geiger = (dticks / 78) / dtime * 3600
 
             last_time = time
             last_ticks = ticks
