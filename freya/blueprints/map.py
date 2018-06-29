@@ -8,6 +8,7 @@ from freya.models import FreyaPacket, IridiumPacket
 
 global last_time
 global last_ticks
+
 last_time = 0
 last_ticks = 0
 
@@ -22,6 +23,7 @@ def map_index():
 @map_bp.route('/map_data')
 def get_data():
     try:
+        global telemetry
         global last_time
         global last_ticks
 
@@ -62,7 +64,7 @@ def get_data():
             }
 
             return jsonify(telemetry)
-        return()
+        return jsonify(telemetry)
     except Exception as e:
         app.logger.exception("Не могу получить данные для обновления карты")
 
