@@ -37,23 +37,20 @@ def get_data():
         cdm = freya_packet.cdm_conc
         mq7 = freya_packet.mq7_conc
 
-        try:
-            geiger = (ticks - last_ticks) / (time - last_time)
-        except ZeroDivisionError:
-            geiger = 0
-
         if time != last_time:
+            geiger = (ticks - last_ticks) / (time - last_time)
+
             last_time = time
             last_ticks = ticks
 
-        format_data = "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>Температура: {3} °C<br>" \
-                      "Концентрация CO2: {4} ppm<br>Концентрация CO: {5} ppm<br>Уровень радиации: {6} мкР/ч".format(
-            lat, lon, press, temp, cdm, mq7, geiger
-        )
+            format_data = "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>Температура: {3} °C<br>" \
+                          "Концентрация CO2: {4} ppm<br>Концентрация CO: {5} ppm<br>Уровень радиации: {6} мкР/ч".format(
+                lat, lon, press, temp, cdm, mq7, geiger
+            )
 
-        telemetry = {
-	    'last_time': last_time,
-	    'time': time,
+            telemetry = {
+            'last_time': last_time,
+            'time': time,
             'lat': freya_packet.latitude,
             'lon': freya_packet.longitude,
             'press': round(freya_packet.bmp_press, 2),
@@ -62,9 +59,10 @@ def get_data():
             'mq7': freya_packet.mq7_conc,
             'geiger': freya_packet.geiger_ticks,
             'format_data': format_data
-        }
+            }
 
-        return jsonify(telemetry)
+            return jsonify(telemetry)
+        return()
     except Exception as e:
         app.logger.exception("Не могу получить данные для обновления карты")
 
