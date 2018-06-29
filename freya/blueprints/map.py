@@ -43,7 +43,7 @@ def get_data():
             geiger = 0
 
         if time != last_time:
-	    last_time = time
+            last_time = time
             last_ticks = ticks
 
         format_data = "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>Температура: {3} °C<br>" \
