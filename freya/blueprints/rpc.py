@@ -2,6 +2,14 @@ from freya import jsonrpc, db, app
 from freya.models import IridiumPacket, FreyaPacket
 from datetime import datetime
 
+def gps_convert(raw_data):
+    raw_data = str(raw_data)
+    data_degree = raw_data[:2] + "."
+    data_minute = int(raw_data[3:]) // 60
+    convert_data = float(data_degree + str(data_minute))
+
+    return convert_data
+
 def do_push_data(data):
 
     irid = IridiumPacket()
@@ -45,11 +53,12 @@ def do_push_data(data):
         freya_pack.mq7_conc = pack['MQ7Conc']
         freya_pack.geiger_ticks = pack['GeigerTicks']
         freya_pack.height = pack['Height']
-        pre_lat = pack['Latitude']
-        pre_lon = pack['Longitude']
-        freya_pack.latitude = (pre_lat / 100 - pre_lat // 100) / 60 + (pre_lat // 100)
-        freya_pack.longitude = (pre_lon / 100 - pre_lon // 100) + (pre_lon // 100)
         freya_pack.has_fix = pack['HasFix']
+
+        pre_lat = pack['Latitude'] / 100
+        pre_lon = pack['Longitude'] / 100
+        freya_pack.latitude = gps_convert(pre_lat)
+        freya_pack.longitude = gps_convert(pre_lon)
 
         db.session.add(freya_pack)
 
