@@ -1,6 +1,9 @@
+from cmath import e
+
 from freya import jsonrpc, db, app
 from freya.models import IridiumPacket, FreyaPacket
 from datetime import datetime
+
 
 def gps_convert(raw_data):
     raw_data = str(raw_data)
@@ -50,7 +53,7 @@ def do_push_data(data):
         freya_pack.accz = pack['Z']
 
         freya_pack.cdm_conc = pack['CDMConc']
-        freya_pack.mq7_conc = pack['MQ7Conc']
+        freya_pack.mq7_conc = 3.027 * e**(1.0698 * (5 / 1024 * pack['MQ7Conc']))
         freya_pack.geiger_ticks = pack['GeigerTicks']
         freya_pack.height = pack['Height']
         freya_pack.has_fix = pack['HasFix']
