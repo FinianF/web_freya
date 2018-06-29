@@ -37,12 +37,12 @@ def get_data():
         press = round(freya_packet.bmp_press / 133.3224, 2)
         temp = round(freya_packet.bmp_temp, 2)
         cdm = freya_packet.cdm_conc
-        mq7 = freya_packet.mq7_conc
+        mq7 = round(freya_packet.mq7_conc, 2)
 
         if time != last_time:
             dticks = ticks - last_ticks
             dtime = (time - last_time) * 0.001
-            geiger = (dticks / 78) / dtime * 3600
+            geiger = round((dticks / 78) / dtime * 3600, 2)
 
             last_time = time
             last_ticks = ticks
