@@ -1,25 +1,6 @@
-from flask import Flask, Blueprint
-from flask_assets import Environment
-from flask_jsonrpc import JSONRPC
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
 
-from logging.config import dictConfig
-
-dictConfig({
-    'version': 1,
-    'formatters': {'default': {
-        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-    }},
-    'handlers': {'wsgi': {
-        'class': 'logging.StreamHandler',
-        'stream': 'ext://flask.logging.wsgi_errors_stream',
-        'formatter': 'default'
-    }},
-    'root': {
-        'level': 'INFO',
-        'handlers': ['wsgi']
-    }
-})
+import logging
 
 app = Flask(
     __name__,
@@ -27,30 +8,21 @@ app = Flask(
     template_folder="templates"
 )
 
-
 from config import *
-
 app.config.from_object(DevelopmentConfig())
 
+from freya.database import db
+db.init_app(app)
 
-assets = Environment(app)
-jsonrpc = JSONRPC(app, '/api')
-db = SQLAlchemy(app)
+from freya.api import rpc
+rpc.init_app(app)
 
-import freya.assets
-import freya.models
+from freya.assets import assets
+assets.init_app(app)
 
-
-mp_bp = Blueprint('main_page', __name__, url_prefix="/")
-ft_bp = Blueprint('freya_team', __name__, url_prefix="/freya_team")
-map_bp = Blueprint('map', __name__, url_prefix="/map")
-
-import freya.blueprints.page_render
-import freya.blueprints.map
-import freya.blueprints.rpc
-
-app.register_blueprint(mp_bp)
-app.register_blueprint(ft_bp)
+from freya.pages import bp as pages_bp
+from freya.map import bp as map_bp
+app.register_blueprint(pages_bp)
 app.register_blueprint(map_bp)
 
 

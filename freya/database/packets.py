@@ -1,4 +1,4 @@
-from freya import db
+from freya.database import db
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Integer, String, Float, DateTime, Boolean

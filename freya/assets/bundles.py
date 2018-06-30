@@ -1,5 +1,5 @@
 from flask_assets import Bundle
-from freya import assets
+from freya.assets import assets
 
 page_css = Bundle("css/page.css")
 ft_css = Bundle("css/freya_team.css")

@@ -32,6 +32,7 @@ def do_push_data(data):
     irid.longitude = loc['LongitudeDegrees']
     irid.cep_radius = loc['CEPRadius']
 
+
     db.session.add(irid)
 
 
@@ -59,6 +60,7 @@ def do_push_data(data):
         freya_pack.has_fix = pack['HasFix']
 
         pre_lat = pack['Latitude'] / 100
+
         pre_lon = pack['Longitude'] / 100
         freya_pack.latitude = gps_convert(pre_lat)
         freya_pack.longitude = gps_convert(pre_lon)
