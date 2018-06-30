@@ -6,6 +6,8 @@ class Config():
     CSRF_ENABLED = True
 
     SECRET_KEY = 'ANGRY_ALPACA_LOL'
+    
+    SQLALCHEMY_DATABASE_URI = "sqlite:///../freya.db"
 
 
 class ProductionConfig(Config):
@@ -17,7 +19,6 @@ class DevelopmentConfig(Config):
 
     ASSETS_DEBUG = True
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///../test.db"
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
