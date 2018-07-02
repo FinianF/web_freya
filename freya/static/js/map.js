@@ -85,7 +85,6 @@ function draw(){
         vector.getSource().addFeature(feature);
 
         popup_data = data.format_data;
-        //$(element).data('bs.popover').options.content = popup_data;
     };
 
 
