@@ -3,6 +3,14 @@ from jinja2 import TemplateNotFound
 
 from freya import mp_bp
 from freya import ft_bp
+from freya import map_bp
+
+@map_bp.route('/')
+def map_index():
+    try:
+        return render_template('map.html')
+    except TemplateNotFound:
+        abort(404)
 
 @mp_bp.route('/')
 def mp_bp_index():
