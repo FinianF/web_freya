@@ -6,6 +6,7 @@ from datetime import datetime
 from cmath import e
 
 from freya.database import db
+from freya.database.node import FreyaNode
 
 Base = db.Model
 
@@ -13,9 +14,10 @@ class IridiumPacket(Base):
     __tablename__ = "Iridium_packets"
 
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    
+    freya_node_imei = Column(ForeignKey(FreyaNode.imei), nullable=False)
 
-    sdr_reference = Column(Integer)
-    imei = Column(String(length=100))
+    cdr_reference = Column(Integer)
     session_status = Column(SmallInteger)
     momsn = Column(Integer)
     mtmsn = Column(Integer)
@@ -26,12 +28,14 @@ class IridiumPacket(Base):
     longitude = Column(Float)
     cep_radius = Column(Integer)
 
-    ref_freya_packets = relationship("FreyaPacket", back_populates = "ref_iridium_packet")
+    ref_freya_packets = relationship("FreyaPacket", back_populates="ref_iridium_packet")
+    
+    ref_freya_node = relationship("FreyaNode", back_populates="ref_iridium_packets")
     
     def __init__(self, header, loc):
-        self.sdr_reference = header['CDRReference']
-        self.imei = header['IMEI']
+        self.cdr_reference = header['CDRReference']
         self.session_status = header['SessionStatus']
+        self.freya_node_imei = header['IMEI']
         self.momsn = header['MOMSN']
         self.mtmsn = header['MTMSN']
         self.time_of_session = datetime.utcfromtimestamp(header['TimeOfSession'])
@@ -44,6 +48,10 @@ class IridiumPacket(Base):
     def save(self):
         db.session.add(self)
         db.session.commit()
+        
+    @staticmethod
+    def get():
+        pass
 
 
 def gps_convert(raw_data):
@@ -81,6 +89,8 @@ class FreyaPacket(Base):
     latitude = Column(Float)
     longitude = Column(Float)
     has_fix = Column(Boolean)
+    
+    radiation = Column(Float)
 
     ref_iridium_packet = relationship('IridiumPacket', back_populates="ref_freya_packets")
     
@@ -113,6 +123,25 @@ class FreyaPacket(Base):
     def save(self):
         db.session.add(self)
         db.session.commit()
+        
+    def calc_radiation(self):
+        try:
+            node = self.ref_iridium_packet.ref_freya_node
+            irips = node.ref_iridium_packets
+            freps = list()
+            
+            for irip in irips:
+                freps += irip.ref_freya_packets
+                
+            res = freps[0]
+            for p in freps:
+                if p.id > res.id and p.id < self.id: res = p
+                
+            if self == res: raise
+            dtime, dticks = self.time - res.time, self.geiger_ticks - res.geiger_ticks
+        except:
+            dtime, dticks = self.time, self.geiger_ticks
+        self.radiation = (dticks / 78) / dtime * 3600
 
 
 
