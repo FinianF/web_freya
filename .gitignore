@@ -27,3 +27,5 @@ include/*
 env/
 
 *.db
+
+.webassets-cache

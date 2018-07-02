@@ -4,7 +4,7 @@ from flask_jsonrpc import jsonify
 
 from freya import map_bp
 from freya import app
-from freya.models import FreyaPacket, IridiumPacket
+from freya.models import FreyaPacket
 
 global last_time
 global last_ticks
@@ -65,7 +65,6 @@ def get_data():
             'format_data': format_data
             }
 
-            return jsonify(telemetry)
         return jsonify(telemetry)
     except Exception as e:
         app.logger.exception("Не могу получить данные для обновления карты")
