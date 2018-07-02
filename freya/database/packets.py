@@ -6,6 +6,13 @@ from sqlalchemy import BigInteger, SmallInteger
 
 Base = db.Model
 
+def gps_convert(raw_data):
+    raw_data = str(raw_data)
+    data_degree = raw_data[:2] + "."
+    data_minute = int(raw_data[3:]) // 60
+    convert_data = float(data_degree + str(data_minute))
+
+    return convert_data
 
 class IridiumPacket(Base):
     __tablename__ = "Iridium_packets"
@@ -19,13 +26,29 @@ class IridiumPacket(Base):
     mtmsn = Column(Integer)
     time_of_session = Column(DateTime)
 
-    #location information
     indicator = Column(SmallInteger)
     latitude = Column(Float)
     longitude = Column(Float)
     cep_radius = Column(Integer)
 
     ref_freya_packets = relationship("FreyaPacket", back_populates = "ref_iridium_packet")
+    
+    def __init__(self, header, loc):
+        self.sdr_reference = header['CDRReference']
+        self.imei = header['IMEI']
+        self.session_status = header['SessionStatus']
+        self.momsn = header['MOMSN']
+        self.mtmsn = header['MTMSN']
+        self.time_of_session = datetime.utcfromtimestamp(header['TimeOfSession'])
+
+        self.indicator = loc['Indicator']
+        self.latitude = loc['LatitudeDegrees']
+        self.longitude = loc['LongitudeDegrees']
+        self.cep_radius = loc['CEPRadius']
+        
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 class FreyaPacket(Base):
@@ -56,6 +79,33 @@ class FreyaPacket(Base):
     has_fix = Column(Boolean)
 
     ref_iridium_packet = relationship('IridiumPacket', back_populates="ref_freya_packets")
+    
+    def __init__(self, pack, irid):
+        self.ref_iridium_packet = irid
+
+        self.flag = pack['Flag']
+        self.time = pack['Time']
+
+        self.bmp_press = pack['BMPPress']
+        self.bmp_temp = pack['BMPTemp'] / 100
+        self.ds_temp = pack['DSTemp'] / 16
+
+        self.accx = pack['X']
+        self.accy = pack['Y']
+        self.accz = pack['Z']
+
+        self.cdm_conc = pack['CDMConc']
+        self.mq7_conc = 3.027 * e**(1.0698 * (5 / 1023 * pack['MQ7Conc']))
+        self.geiger_ticks = pack['GeigerTicks']
+        self.height = pack['Height']
+        self.has_fix = pack['HasFix']
+
+        pre_lat = pack['Latitude'] / 100
+
+        pre_lon = pack['Longitude'] / 100
+        
+        self.latitude = gps_convert(pre_lat)
+        self.longitude = gps_convert(pre_lon)
 
 
 
