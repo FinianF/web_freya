@@ -3,6 +3,9 @@ from freya.database.packets import IridiumPacket, FreyaPacket
 from freya.database.node import FreyaNode
 from freya import app
 
+@rpc.method("getdata")
+def getdata(imei=None, timerange="last")
+    pass
 
 @rpc.method("pushdata")
 def pushdata(MOHeader, MOLocationInformation, MOPayload):
