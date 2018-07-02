@@ -1,18 +1,13 @@
-from freya.database import db
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Integer, String, Float, DateTime, Boolean
 from sqlalchemy import BigInteger, SmallInteger
+from datetime import datetime
+from cmath import e
+
+from freya.database import db
 
 Base = db.Model
-
-def gps_convert(raw_data):
-    raw_data = str(raw_data)
-    data_degree = raw_data[:2] + "."
-    data_minute = int(raw_data[3:]) // 60
-    convert_data = float(data_degree + str(data_minute))
-
-    return convert_data
 
 class IridiumPacket(Base):
     __tablename__ = "Iridium_packets"
@@ -50,6 +45,15 @@ class IridiumPacket(Base):
         db.session.add(self)
         db.session.commit()
 
+
+def gps_convert(raw_data):
+    raw_data = str(raw_data)
+    data_degree = raw_data[:2] + "."
+    data_minute = int(raw_data[3:]) // 60
+    convert_data = float(data_degree + str(data_minute))
+
+    return convert_data
+    
 
 class FreyaPacket(Base):
     __tablename__ = "Freya_packets"
@@ -100,12 +104,15 @@ class FreyaPacket(Base):
         self.height = pack['Height']
         self.has_fix = pack['HasFix']
 
-        pre_lat = pack['Latitude'] / 100
-
-        pre_lon = pack['Longitude'] / 100
+        pre_lat = str(pack['Latitude'] / 100).split(".")
+        pre_lon = str(pack['Longitude'] / 100).split(".")
         
-        self.latitude = gps_convert(pre_lat)
-        self.longitude = gps_convert(pre_lon)
+        self.latitude = float(pre_lat[0] + str(int(pre_lat[1]) // 60))
+        self.longitude = float(pre_lon[0] + str(int(pre_lon[1]) // 60))
+        
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 
