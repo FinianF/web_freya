@@ -116,7 +116,7 @@ body {
     margin-right: 0;
 }
 
-.navbar-links_item-link {
+.navbar-links_item-link .navbar-links_item-link:visited {
    -webkit-font-smoothing: antialiased;
     display: flex;
     -webkit-box-align: center;
@@ -132,6 +132,8 @@ body {
 .navbar-links_item-link:hover {
     color: grey;
 }
+.navbar-links_item-link:
+
 
 .content_title {
     font-family: 'Exo 2.0 Thin Italic';
