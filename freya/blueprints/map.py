@@ -26,7 +26,7 @@ def get_data():
         lat = round(freya_packet.latitude, 4)
         lon = round(freya_packet.longitude, 4)
         press = round(freya_packet.bmp_press / 133.3224, 2)
-        temp = round(freya_packet.bmp_temp, 2)
+        temp = round(freya_packet.ds_temp, 2)
         cdm = freya_packet.cdm_conc
         mq7 = round(freya_packet.mq7_conc, 2)
 
@@ -49,7 +49,7 @@ def get_data():
             'lat': freya_packet.latitude,
             'lon': freya_packet.longitude,
             'press': round(freya_packet.bmp_press, 2),
-            'temp': round(freya_packet.bmp_temp, 2),
+            'temp': round(freya_packet.ds_temp, 2),
             'cdm': freya_packet.cdm_conc,
             'mq7': freya_packet.mq7_conc,
             'geiger': freya_packet.geiger_ticks,
