@@ -117,12 +117,28 @@ class FreyaPacket(Base):
         pre_lat = str(pack['Latitude'] / 100).split(".")
         pre_lon = str(pack['Longitude'] / 100).split(".")
         
-        self.latitude = float(pre_lat[0] + str(int(pre_lat[1]) // 60))
-        self.longitude = float(pre_lon[0] + str(int(pre_lon[1]) // 60))
+        self.latitude = float(pre_lat[0] + "." + str(int(pre_lat[1]) // 60))
+        self.longitude = float(pre_lon[0] + "." + str(int(pre_lon[1]) // 60))
         
     def save(self):
         db.session.add(self)
         db.session.commit()
+        
+    def to_dict(self):
+        return {"time": self.time,
+                "lon": self.longitude,
+                "lat": self.latitude,
+                "co": self.mq7_conc,
+                "co2": self.cdm_conc,
+                "press": self.bmp_press,
+                "temp": self.bmp_temp,
+                "radiaion": self.radiation,
+                "formated": "Координаты: {0}, {1}<br>Давление: {2} мм рт. ст.<br>" \
+                            "Температура: {3} °C<br> Концентрация CO2: {4} ppm<br>" \
+                            "Концентрация CO: {5} ppm<br>Уровень радиации: {6} мкР/ч".format(
+                            self.latitude, self.longitude, self.bmp_press, 
+                            self.bmp_temp, self.cdm_conc, self.mq7_conc, self.radiation)
+        }
         
     def calc_radiation(self):
         try:

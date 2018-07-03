@@ -1,11 +1,17 @@
+from flask import jsonify
+
 from freya.api import rpc
 from freya.database.packets import IridiumPacket, FreyaPacket
 from freya.database.node import FreyaNode
 from freya import app
 
 @rpc.method("getdata")
-def getdata(imei=None, timerange="last")
-    pass
+def getdata(timerange):
+    if timerange == "last":
+        pack = FreyaPacket.query.order_by(FreyaPacket.id.desc()).first()
+        if not pack: return "None"
+        return jsonify(pack.to_dict())
+    return "wrong args"
 
 @rpc.method("pushdata")
 def pushdata(MOHeader, MOLocationInformation, MOPayload):

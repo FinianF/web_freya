@@ -77,6 +77,7 @@ function draw(){
 
 
     function update_map(data) {
+        console.log(data)
         vector.getSource().clear();
         pst = ol.proj.fromLonLat([data.lon, data.lat]);
         feature = new ol.Feature({
@@ -84,15 +85,25 @@ function draw(){
         });
         vector.getSource().addFeature(feature);
 
-        popup_data = data.format_data;
+        popup_data = data.formated;
         //$(element).data('bs.popover').options.content = popup_data;
     };
 
 
     setInterval(
         function() {
-            $.getJSON("/map/map_data", update_map)
+            $.post({
+                url: "/api",
+                data: JSON.stringify({"jsonrpc": "2.0",
+                       "method": "getdata",
+                       "id": "0",
+                       "params": {"timerange": "last"},
+                       }),
+                headers: {"content-type": "application/json"},
+                success: update_map
+                }
+            );
         },
         1000
-    )
+    );
  };
