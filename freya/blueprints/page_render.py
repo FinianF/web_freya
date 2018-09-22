@@ -4,6 +4,7 @@ from jinja2 import TemplateNotFound
 from freya import mp_bp
 from freya import ft_bp
 from freya import map_bp
+from freya import prod_bp
 
 @map_bp.route('/')
 def map_index():
@@ -23,5 +24,12 @@ def mp_bp_index():
 def ft_bp_index():
     try:
         return render_template('freya_team.html')
+    except TemplateNotFound:
+        abort(404)
+
+@prod_bp.route('/')
+def prod_bp_index():
+    try:
+        return render_template('projects.html')
     except TemplateNotFound:
         abort(404)

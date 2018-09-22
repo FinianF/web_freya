@@ -28,10 +28,9 @@ body {
 .layout_row_navbar {
     position: static;
     z-index: 200;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     border-bottom: 1px solid #d5dddf;
-    background-color: #85DA61;
+    background-color: #99CC99;
 }
 
 .layout_row_content {

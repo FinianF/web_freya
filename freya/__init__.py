@@ -43,6 +43,7 @@ import freya.assets
 mp_bp = Blueprint('main_page', __name__, url_prefix="/")
 ft_bp = Blueprint('freya_team', __name__, url_prefix="/freya_team")
 map_bp = Blueprint('map', __name__, url_prefix="/map")
+prod_bp = Blueprint('projects', __name__, url_prefix='/projects')
 
 import freya.blueprints.page_render
 import freya.blueprints.map
@@ -51,6 +52,7 @@ import freya.blueprints.rpc
 app.register_blueprint(mp_bp)
 app.register_blueprint(ft_bp)
 app.register_blueprint(map_bp)
+app.register_blueprint(prod_bp)
 jsonrpc.init_app(app)
 db.init_app(app)
 
